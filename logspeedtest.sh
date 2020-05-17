@@ -8,27 +8,29 @@
 #https://www.gnu.org/licenses/quick-guide-gplv3.html
 
 THIS=$(basename $0)
-VERSION=0.1
+VERSION=0.2
 
 bin="speedtest"
-test_exists_bin=`command -v $bin`
+test_exists_bin=$(command -v $bin)
+unique_file="no"
 
 function help() {
    echo -e "Author: Edson Angelo Carara <edson.carara@gmail.com>"
    echo "CopyLeft GNU GPL 3"
    echo "$THIS $VERSION
    -l <log path>
-   -h (show this help)"
-
+   -h (show this help)
+   -u log tests in an unique file yes|no"
    exit -1
 }
 
-#gets the parameters
-while getopts "hl:" opt
+#gets the script parameters
+while getopts "hlu:" opt
 do
    case $opt in
       "h") help;;
       "l") log_path=$OPTARG ;;
+      "u") unique_file=$OPTARG ;;
       "?") help;;
    esac
 done
@@ -38,7 +40,16 @@ then
    log_path=`pwd`
 fi
 
-log_file="$log_path/speedtest-`date +"%Y-%m-%d"`.txt"
+if [ "${unique_file,,}" == "no" ]
+then
+   log_file="$log_path/speedtest-`date +"%Y-%m-%d"`.csv"
+elif [ "${unique_file,,}" == "yes" ]
+then
+   log_file="$log_path/speedtest.csv"
+else
+   echo "invalid parameter value [${unique_file}]."
+   help
+fi
 
 if [ -z "$test_exists_bin" ]
 then
