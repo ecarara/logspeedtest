@@ -8,7 +8,7 @@
 #https://www.gnu.org/licenses/quick-guide-gplv3.html
 
 THIS=$(basename $0)
-VERSION=0.2
+VERSION=0.2.1
 
 bin="speedtest"
 test_exists_bin=$(command -v $bin)
@@ -25,7 +25,7 @@ function help() {
 }
 
 #gets the script parameters
-while getopts "hlu:" opt
+while getopts "hl:u:" opt
 do
    case $opt in
       "h") help;;
