@@ -1,7 +1,7 @@
 # logspeedtest
 Logs, in csv format, internet speed along the day
 
-This script logs generate one file per day like as speedtest-yyyy-mm-dd.csv or unique file like as speedtest.csv
+This script logs generate one file per day like as speedtest-yyyy-mm-dd.csv or an unique file like as speedtest.csv
 
 You can use this script in crontab as the example below:
 
